@@ -137,7 +137,7 @@ public class ThingDoerTest {
 Android UI test can be done using Espresso or RoboElectric. But this time we should know how to how the dependencies are injected into UI or Activity.
 As we discussed before, Android has different lifecycle components. As per dagger, all activities and fragment’s subcomponents are initialized along with ApplicationComponent(Dagger component). So before launching activity for test, we should teach the app component how the dependencies are provided, that means we can provide mock dependencies to the component. 
 
-As per the suggestions from google and other related documents, we can write a test component with test subcomponent and other fake modules and teach dagger to use these classes for creating a dependency graph for testing. If you thing too much complicated, please look at the Demo project 
+As per the suggestions from google and other related documents, we can write a test component with test subcomponent and other fake modules and teach dagger to use these classes for creating a dependency graph for testing. If you feel too much complicated, please look at the Demo project 
 Demo : https://github.com/roshanstephen/dagger2structure.
 
 I have written UI test using espresso and Roboelectric. Both you can find in androidTest and Test folders respectively.
