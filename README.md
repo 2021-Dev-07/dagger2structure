@@ -5,8 +5,6 @@ Dagger2Structure is a demo app to understand implementation of dagger-android an
 ----------------------------------------------------------------------------------------------
 Dagger is a dependency Injection library which can inject dependencies from outside the class.
 
-Details can be find in below link.
-Link: https://medium.com/@harivigneshjayapalan/dagger-2-for-android-beginners-introduction-be6580cb3edb
 
 This Document will discuss about some of the annotations and analysis of the generated code by dagger.
 
@@ -294,3 +292,9 @@ Done!  You gone through most of the aspects of dagger implementation and i belie
 
 Thanks 
 
+###### Reference
+Link: https://medium.com/@harivigneshjayapalan/dagger-2-for-android-beginners-introduction-be6580cb3edb
+https://google.github.io/dagger/android#injecting-activity-objects
+https://google.github.io/dagger/users-guide
+https://proandroiddev.com/how-to-dagger-2-with-android-part-2-10f4fb8f62d0
+https://medium.com/@fabioCollini/android-testing-using-dagger-2-mockito-and-a-custom-junit-rule-c8487ed01b56
