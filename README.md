@@ -1,7 +1,7 @@
 # dagger2structure
 Dagger2Structure is a demo app to understand implementation of dagger-android and testing
 
-Dagger-2
+## Dagger-2
 ----------------------------------------------------------------------------------------------
 Dagger is a dependency Injection library which can inject dependencies from outside the class.
 
@@ -11,20 +11,20 @@ Link: https://medium.com/@harivigneshjayapalan/dagger-2-for-android-beginners-in
 This Document will discuss about some of the annotations and analysis of the generated code by dagger.
 
 Dagger2 contains a dependency graph which define the dependency for classes.
-
+```
 @Component
 @Modules
 @provides
 @Scope
-
+```
 These are the major annotation defined by dagger to create boilerplate code needed for dependency 
 We will discuss about the structure of the auto-generated classes by dagger to understand 
 Code behind the screen, which may help us to use dagger efficiently.
 
 @Component interface will act as the top class in dependency graph. This will create class implementing Component interface and its abstract methods.
 
-Structure of a component class:
-
+###### Structure of a component class:
+```
 Class component{
 has provider instance variables those will provide dependencies annotated by @provides.
 has a builder class().
@@ -37,44 +37,48 @@ has inject methods.
 	- once developer called inject () methods, components will inject those instance and all 
 	 @inject annotated variables in the instance will get initialized.
 	 
-
+```
 So, from the above structure it’s clear that every class should call inject () method to initialize its @inject annotated instances. 
 Since the build () method provides instance of Dagger Component, to set getter methods, we need to add those into the component interface and those will be implemented as a public methods in Dagger Component class.
 
 
-Dagger@-Android for android specific classes.
------------------------------------------------
+## Dagger@-Android for android specific classes.
 Dagger-android library defined for android specific classes like Application, Activity, Fragment etc. Dagger-android consider components are the application components and Activity, Fragments should have subcomponents. Component and subcomponents have the same structure defined before. But Subcomponents act as modules in Components.
 
+```
 @ContributeAndroidInjector
 @Binds
+```
 
 There are the  additional annotations used in android-dagger library.
 
 AndroidInjector class has a major role in android-dagger to implement subcomponent concept and to inject activity/fragment instances.
 We can discuss from top to bottom of android-dagger implementation. This will help us to clearly understand and implement dagger in efficient manner. 
 
-Application Component > Activity Component > Fragment Component.
+> Application Component > Activity Component > Fragment Component.
 
 Structure of application component:
+
 Class component structure is same in  android-dagger and dagger2.
 Only difference we can see that, the subcomponents added as a provider instance in component. 
 Subcomponent provider provides an android injector class for the respective activity and this will help us to inject instance into the activity.
 
 For understand details, just look into androidInjector.class. 
 Structure of Android Injector class :
-
+```
 androidInjector{
 -has a factory 
 -builder extends from factory creates class having implementation of android Injector. 
 }
+```
 
 We have seen before that component has a provider instance.
-
+```
 Compoent{
 -has provider instance.
 -has initialize methods which will initialize providers. [here providers are androidInjection class]
 }
+```
 
 DaggerApplication class have some instance which need to be injected. 
 
@@ -84,16 +88,16 @@ DaggerApplication class have some instance which need to be injected.
 Component class will inject andoridInject provider instance into application activityInjector. 
 This activity injector has the main role to find the respective activity subcomponent implemention and inject instance into the respective activity.
 
-Behind the screen :
+###### Behind the screen :
 
 When we call androiddInjector(this), dagger will find activityInjector from the application class and find the respective subcomponent  provider to initialize instances. Once provider received, dagger inject “this” into the component and initialize @inject annotated instances. Same way fragment works. Please look into the boilerplate code and find the implementation in detail.
 
 This is a document intended to share some basic idea about dagger2- and dagger-android injections. 
 
 
-##Dagger-Android Test
+## Dagger-Android Test
 
-######Overview:
+###### Overview:
 
 Dagger-Android has introduced with intension of writing dependency injection graph in efficient way based on android framework. Android has different lifecycle classes like Application, Fragment, Activity. All these classes are related as below.
 Application (top class) > Activity > Fragment > Nested Fragment 
@@ -103,7 +107,7 @@ Subcomponents have the same structure as components explained in dagger-2. But o
 
 [Demo Project](https://github.com/roshanstephen/dagger2structure)
 
-######Unit test:
+###### Unit test:
 
 As per google Document, for a single class we don’t need to use DI for testing. Since classes are already decoupled using dagger injection, developer can easily test single classes with help of Junit
 
@@ -131,12 +135,12 @@ public class ThingDoerTest {
 ```
 
 
-UI Test:
+###### UI Test:
 Android UI test can be done using Espresso or RoboElectric. But this time we should know how to how the dependencies are injected into UI or Activity.
 As we discussed before, Android has different lifecycle components. As per dagger, all activities and fragment’s subcomponents are initialized along with ApplicationComponent(Dagger component). So before launching activity for test, we should teach the app component how the dependencies are provided, that means we can provide mock dependencies to the component. 
 
 As per the suggestions from google and other related documents, we can write a test component with test subcomponent and other fake modules and teach dagger to use these classes for creating a dependency graph for testing. If you thing too much complicated, please look at the Demo project 
-Demo :  https://github.com/roshanstephen/dagger2structure.
+Demo : https://github.com/roshanstephen/dagger2structure.
 
 I have written UI test using espresso and Roboelectric. Both you can find in androidTest and Test folders respectively.
 
@@ -286,7 +290,7 @@ public class TestMainActivity {
 
 }
 ```
+Done!  You gone through most of the aspects of dagger implementation and i believe got the basic understanding. Now try yourself .
 
-Done!
 Thanks 
 
