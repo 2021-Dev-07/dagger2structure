@@ -293,7 +293,7 @@ Done!  You gone through most of the aspects of dagger implementation and i belie
 Thanks 
 
 ###### Reference
-Link: https://medium.com/@harivigneshjayapalan/dagger-2-for-android-beginners-introduction-be6580cb3edb
+https://medium.com/@harivigneshjayapalan/dagger-2-for-android-beginners-introduction-be6580cb3edb
 https://google.github.io/dagger/android#injecting-activity-objects
 https://google.github.io/dagger/users-guide
 https://proandroiddev.com/how-to-dagger-2-with-android-part-2-10f4fb8f62d0
