@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+def DAGGER_VERSION = 2.15
+
+android {
+    compileSdkVersion 26
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId "cof.gof.dagger2structure"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "cof.gof.dagger2structure.MockTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.google.code.findbugs'
+    })
+
+    //dagger-core
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    //dagger-android
+    implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'org.mockito:mockito-core:2.19.0'
+    implementation 'org.mockito:mockito-android:2.19.0'
+
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:3.2.2"
+   /* testImplementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    androidTestImplementation "com.google.dagger:dagger:$DAGGER_VERSION"*/
+}
+
+android.applicationVariants.all {
+    def aptOutputDir = new File(buildDir, "generated/source/apt/${it.unitTestVariant.dirName}")
+    it.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
+}
