@@ -1,7 +1,8 @@
 # dagger2structure
 Dagger2Structure is a demo app to understand implementation of dagger-android and testing
 
-
+Dagger-2
+----------------------------------------------------------------------------------------------
 Dagger is a dependency Injection library which can inject dependencies from outside the class.
 
 Details can be find in below link.
@@ -40,9 +41,9 @@ has inject methods.
 So, from the above structure it’s clear that every class should call inject () method to initialize its @inject annotated instances. 
 Since the build () method provides instance of Dagger Component, to set getter methods, we need to add those into the component interface and those will be implemented as a public methods in Dagger Component class.
 
+
 Dagger@-Android for android specific classes.
 -----------------------------------------------
-
 Dagger-android library defined for android specific classes like Application, Activity, Fragment etc. Dagger-android consider components are the application components and Activity, Fragments should have subcomponents. Component and subcomponents have the same structure defined before. But Subcomponents act as modules in Components.
 
 @ContributeAndroidInjector
@@ -85,6 +86,6 @@ This activity injector has the main role to find the respective activity subcomp
 
 Behind the screen :
 
-When we call androiddInjector(this), dagger will find activitInjector from the application class and find the respective subcomponent  provider to initialize instances. Once provider received, dagger inject “this” into the component and initialize @inject annotated instances. Same way fragment works. Please look into the boilerplate code and find the implementation in detail.
+When we call androiddInjector(this), dagger will find activityInjector from the application class and find the respective subcomponent  provider to initialize instances. Once provider received, dagger inject “this” into the component and initialize @inject annotated instances. Same way fragment works. Please look into the boilerplate code and find the implementation in detail.
 
 This is a document intended to share some basic idea about dagger2- and dagger-android injections. 
